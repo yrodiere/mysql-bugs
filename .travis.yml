@@ -1,0 +1,16 @@
+dist: xenial
+services:
+  - mysql
+language: java
+jdk:
+  - openjdk8
+cache:
+  directories:
+    - $HOME/.m2
+before_install:
+  - mysql -e 'CREATE DATABASE test;'
+install:
+  - mvn clean install
+before_cache:
+  # Do not put the artifacts we just built into the cache
+  - rm -r $HOME/.m2/repository/org/hibernate/bugs/
